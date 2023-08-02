@@ -11,7 +11,6 @@ def menu():
     print("6. Matrix Transpose")
     print("7. Trace of a Matrix")
     print("8. Solve System of Linear Equations")
-    print("8. Solve System of Linear Equations")
     print("9. Determinant")
     print("10. Inverse")
     print("11. Eigen Value and Eigen Vector")
@@ -33,6 +32,8 @@ def menu():
         result = Transpose()
     elif choice ==7 :
         result = Trace()
+    elif choice ==8 :
+        result = SysOfLinAlg()
     elif choice ==9 :
         result = Determinant()
     elif choice ==10 :
@@ -45,7 +46,6 @@ def menu():
         print("Select a valid operation ")
         return
 
- 
     print("The result of the operation is \n", result)
     
     return
@@ -76,7 +76,6 @@ def Addition():
         return None
 
     return Matrix1 + Matrix2
-
 
 def Subtraction():
     """
@@ -131,7 +130,7 @@ def ElMulti():
     This allows the user to Enter 2 matrices and return the Element wise multiplication of the matrix
     """
 
-    print("You have selected the Subtractionf ")
+    print("You have selected the Elementwise Matrix Multiplication ")
     M = int(input("Enter the number of rows in the matrix "))
     N = int(input("Enter the number of columns in the matrix "))
 
@@ -153,10 +152,169 @@ def ElMulti():
 
     return Matrix1 * Matrix2
 
+def Multiplication():
+    """
+    This allows the user to Enter 2 matrices and return the matrix multiplication of the Matrices
+    """
 
+    print("You have selected the Matrix Multiplication ") 
 
+    try :
+        M1 = int(input("Enter the number of rows in the matrix 1 "))
+        N1 = int(input("Enter the number of columns in the matrix 1 "))
+        ele = input(f"Enter the {M1*N1} elements of the matrix 1, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix1 = np.array(ele).reshape(M1,N1)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
 
+    try :
+        M2 = int(input("Enter the number of rows in the matrix 2 "))
+        N2 = int(input("Enter the number of columns in the matrix 2 "))
+        ele = input(f"Enter the {M2*N2} elements of the matrix 2, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix2 = np.array(ele).reshape(M2,N2)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
 
+    if N1 == M2:
+        return Matrix1.dot(Matrix2)
+    else :
+        print("Can't multiply the given matrices ")
+        return None
+
+def Transpose():
+    """
+    This allows the user to Enter a matrix and return the transpose of the Matrices
+    """
+
+    print("You have selected the Matrix Transpose ")
+    M = int(input("Enter the number of rows in the matrix "))
+    N = int(input("Enter the number of columns in the matrix "))
+
+    try :
+        ele = input(f"Enter the {M*N} elements of the matrix 1, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix1 = np.array(ele).reshape(M,N)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
+
+    return Matrix1.T
+
+def Trace():
+    """
+    This allows the user to Enter a matrix and return the trace of the Matrices
+    """
+
+    print("You have selected the Matrix Transpose ")
+    M = int(input("Enter the number of rows in the matrix "))
+    N = int(input("Enter the number of columns in the matrix "))
+
+    try :
+        ele = input(f"Enter the {M*N} elements of the matrix 1, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix1 = np.array(ele).reshape(M,N)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
+
+    return Matrix1.trace()
+
+def Determinant():
+    """
+    This allows the user to Enter a matrix and return the Determinant of the Matrices
+    """
+
+    print("You have selected the Matrix Transpose ")
+    M = int(input("Enter the number of rows in the matrix "))
+    N = int(input("Enter the number of columns in the matrix "))
+
+    try :
+        ele = input(f"Enter the {M*N} elements of the matrix 1, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix1 = np.array(ele).reshape(M,N)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
+
+    return np.linalg.det(Matrix1)
+
+def Inverse() :
+    """
+    This allows the user to Enter a matrix and return the inverse of the Matrices
+    """
+
+    print("You have selected the Matrix Transpose ")
+    M = int(input("Enter the number of rows in the matrix "))
+    N = int(input("Enter the number of columns in the matrix "))
+
+    try :
+        ele = input(f"Enter the {M*N} elements of the matrix 1, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix1 = np.array(ele).reshape(M,N)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
+
+    if np.linalg.det(Matrix1) == 0 :
+        print("Inverse of the given matrix doesnot exist")
+        return None
+    
+    return np.linalg.inv(Matrix1)
+    
+def SysOfLinAlg():
+    """
+    This allows the user to Enter a matrix and a vector return the solution of the equation from the coff matrix
+    """
+
+    print("You have selected the Subtraction ")
+    M = int(input("Enter the number of rows in the matrix "))
+    N = int(input("Enter the number of columns in the matrix "))
+
+    try :
+        ele = input(f"Enter the {M*N} elements of the matrix 1, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix1 = np.array(ele).reshape(M,N)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
+
+    try :
+        ele = input(f"Enter the {M} elements of the Vector, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix2 = np.array(ele).reshape(M,1)
+    except :
+        print("Your elements doesn't match the numbers of elements in the vector ")
+        return None
+
+    return np.linalg.solve(Matrix1,Matrix2)
+
+def Eigen():
+    """
+    This allows the user to Enter a matrix return the solution of the Eigen Values and Vectors as an obj dictonary of array
+    """
+
+    print("You have selected the Subtraction ")
+    M = int(input("Enter the number of rows in the matrix "))
+    N = int(input("Enter the number of columns in the matrix "))
+
+    try :
+        ele = input(f"Enter the {M*N} elements of the matrix 1, seprated by ',' ").split(",")
+        ele = [eval(x) for x in ele]
+        Matrix1 = np.array(ele).reshape(M,N)
+    except :
+        print("Your elements doesn't match the numbers of elements in the matrix ")
+        return None
+
+    eval , evec = np.linalg.eig(Matrix1)
+
+    resDict = {'Eigen_Values': eval, 'Eigen_Vector':evec}
+
+    return resDict
 
 if __name__ == "__main__" :
-    menu()
+    while True :
+        menu()
