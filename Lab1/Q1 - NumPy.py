@@ -297,13 +297,13 @@ def Eigen():
     This allows the user to Enter a matrix return the solution of the Eigen Values and Vectors as an obj dictonary of array
     """
 
-    print("You have selected the Subtraction ")
+    print("You have selected the Eigen Value/ Eigen Vector ")
     M = int(input("Enter the number of rows in the matrix "))
     N = int(input("Enter the number of columns in the matrix "))
 
     try :
         ele = input(f"Enter the {M*N} elements of the matrix 1, seprated by ',' ").split(",")
-        ele = [eval(x) for x in ele]
+        ele = [int(x) for x in ele]
         Matrix1 = np.array(ele).reshape(M,N)
     except :
         print("Your elements doesn't match the numbers of elements in the matrix ")

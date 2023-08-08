@@ -45,7 +45,7 @@ def Credit():
 def Debit():
     Acc = eval(input("Enter the Account number to Debit acc"))
     amt = eval(input("Enter the Amount to Cerdit acc"))
-
+    
     for rec in df.index():
         if df[rec]['Account_Number'] == Acc :
             if df[rec]['Balance'] < amt and df[rec]['Acc_Type'] == 'SB':
